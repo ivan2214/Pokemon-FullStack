@@ -3,14 +3,12 @@ const { Router } = require("express");
 // Ejemplo: const authRouter = require('./auth.js');
 
 const router = Router();
-
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+const pokemonMiddleware = require("./pokemonMiddleware.js");
+const typesMiddleware = require("./typesMiddleware.js");
 
-router.get("/", async (req, res) => {
-  res.status(200).json({
-    error:"errorrrr"
-  })
-});
+router.use("/pokemons", pokemonMiddleware);
+router.use("/types", typesMiddleware);
 
 module.exports = router;
