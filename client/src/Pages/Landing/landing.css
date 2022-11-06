@@ -1,0 +1,109 @@
+.landingPage {
+  background-color: #fff;
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-areas: "img texts texts";
+}
+
+.sec-texts {
+  width: 100%;
+  background-color: #fff;
+  grid-area: texts;
+
+}
+
+.sec-textos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.sec-h1 {
+  width: 100%;
+}
+
+h1 {
+  color: #66625c;
+  font-size: 4.5rem;
+  font-weight: 700;
+}
+
+.sec-pg {
+  width: 50%;
+}
+
+.sec-pg p {
+  font-size: 1.5rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: lighter;
+}
+
+.sec-img {
+  width: 100%;
+  background-color: beige;
+  grid-area: img;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #eb544d;
+  border-radius: 0 100% 0 0  ;
+  background-position: center;
+  box-shadow: 0 0 3px 9px rgb(0 0 0 / 10%);
+}
+
+.sec-img img {
+  width: 100%;
+}
+
+.btn {
+  perspective: 1000px;
+  padding: 1em 1em;
+  background: linear-gradient(#eb544d, #eb544d);
+  border: none;
+  outline: none;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 10px 10px #eb544d;
+  cursor: pointer;
+  transform: rotateX(70deg) rotateZ(30deg);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.btn::before {
+  content: "";
+  width: 100%;
+  height: 15px;
+  background-color: #eb544d;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: rotateX(90deg);
+  transform-origin: bottom;
+}
+
+.btn::after {
+  content: "";
+  width: 15px;
+  height: 100%;
+  background-color: #eb544d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotateY(-90deg);
+  transform-origin: right;
+}
+
+.btn:hover {
+  transform: rotateX(30deg) rotateZ(0);
+}

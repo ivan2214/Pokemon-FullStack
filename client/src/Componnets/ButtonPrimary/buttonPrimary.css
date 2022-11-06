@@ -1,0 +1,9 @@
+.btn-primary{
+  background-color: #ff8ba7;
+  border-radius: .8rem;
+  width: fit-content;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: #33272a;
+  text-decoration: none;
+}

@@ -1,0 +1,12 @@
+.types {
+  border: none;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+  height: 2rem;
+  border-radius: 20px;
+  padding-left: 10px;
+}
+
+.types:focus {
+  outline: none;
+}
