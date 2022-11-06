@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
 export const POKE_DETAILS = "POKE_DETAILS";
 export const POKE_NAME = "POKE_NAME";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -50,3 +51,13 @@ export function getByName(query) {
     }
   };
 }
+
+//ORDENAMIENTOS
+
+export const orderByName = (order) => {
+  console.log(order);
+  return {
+    type: ORDER_BY_NAME,
+    payload: order,
+  };
+};
