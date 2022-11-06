@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAllPokemons } from "../../redux/actions";
 import CardPokemon from "../CardPokemon/CardPokemon";
 import Spinner from "../Spinner/Spinner";

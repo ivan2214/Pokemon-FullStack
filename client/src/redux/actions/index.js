@@ -43,6 +43,7 @@ export function getByName(query) {
       return dispatch({
         type: POKE_NAME,
         payload: fetchedPokes.data,
+        loading: false,
       });
     } catch (err) {
       console.log({ msg: err.message });

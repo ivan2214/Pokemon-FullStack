@@ -1,11 +1,11 @@
 import React from "react";
-import Input from "../Input/Input";
+
 import "./Formulario.css";
 const Formulario = () => {
   return (
     <section>
       <form action="">
-        <Input
+        <input
           placeHolder="Buscar"
           name="buscar"
           label="Buscar por Nombre"

@@ -3,9 +3,7 @@ import { useDispatch } from "react-redux";
 import { getByName } from "../../redux/actions";
 import "./searchBar.css";
 import buscar from "../../assets/images/search.png";
-import Order from "../FiltersAndOrder/Order/Order";
-import OrdenCreate from "../FiltersAndOrder/Order/OrdenCreate/OrdenCreate";
-import FilterType from "../FiltersAndOrder/Filter/FilterType/FilterType";
+
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
@@ -43,9 +41,7 @@ const SearchBar = () => {
           <img src={buscar} alt="buscar" className="buscar"></img>
         </button>
       </form>
-      <Order />
-      <OrdenCreate />
-      <FilterType/>
+    
     </>
   );
 };
