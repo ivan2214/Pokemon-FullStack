@@ -7,7 +7,7 @@ import "./cards.css";
 
 const Cards = () => {
   //estados y las actions
-  let allPokemons = useSelector((state) => state.allPokemons);
+  let pokemons = useSelector((state) => state.pokemons);
   let loading = useSelector((state) => state.loading);
 
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const Cards = () => {
         <Spinner />
       ) : (
         <section className="cards-container">
-          {allPokemons?.map((p) => (
+          {pokemons?.map((p) => (
             <CardPokemon
               key={p.pokeId}
               name={p.name}

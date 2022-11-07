@@ -4,7 +4,7 @@ export const GET_ALL_POKEMONS = "GET_ALL_POKEMONS";
 export const POKE_DETAILS = "POKE_DETAILS";
 export const POKE_NAME = "POKE_NAME";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
-
+export const ORDER_BY_ATACK = "ORDER_BY_ATACK";
 export function getAllPokemons() {
   return async function (dispatch) {
     try {
@@ -59,5 +59,13 @@ export const orderByName = (order) => {
   return {
     type: ORDER_BY_NAME,
     payload: order,
+  };
+};
+
+export const orderByAtack = (atack) => {
+  console.log(atack);
+  return {
+    type: ORDER_BY_ATACK,
+    payload: atack,
   };
 };

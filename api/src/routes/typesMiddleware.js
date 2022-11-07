@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const { Type } = require("../db");
+const { getAllPokemons } = require("./Controllers/controllers");
 
 router.get("/", async (req, res) => {
   try {
-    const types = await Type.findAll();
-    res.send(types);
+    const cantidadTypes = await Type.count(); // cuantos hay en la db
+    const allPokemons = await getAllPokemons();
+    const pokeMapeados = allPokemons?.map((el) => el.types);
+    res.status(200).send(pokeMapeados);
   } catch (err) {
     res.send({ msg: err.message });
   }

@@ -41,6 +41,9 @@ module.exports = (sequelize) => {
           isUrl: true,
         },
       },
+      createInDataBase: {
+        type: DataTypes.BOOLEAN,
+      },
     },
     {
       timestamps: false,

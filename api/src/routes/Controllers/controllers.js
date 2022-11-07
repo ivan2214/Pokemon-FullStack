@@ -40,16 +40,23 @@ const getDbInfo = async () => {
     include: {
       model: Type,
       attributes: ["name"],
+      through: {
+        attributes: [],
+      },
     },
   });
 };
 
 const getAllPokemons = async () => {
   // guardo los pokemones de la base de datos (osea los creados) y me traigo todos los pokemones deesde la API y los combino para asi podeer tener a todos
-  const apiPokemon = await getApiInfo();
-  const dbInfo = await getDbInfo();
-  const allInfo = [...apiPokemon, dbInfo];
-  return allInfo;
+  try {
+    const apiPokemon = await getApiInfo();
+    const dbInfo = await getDbInfo();
+    const allInfo = [...apiPokemon, dbInfo];
+    return allInfo;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 module.exports = {
