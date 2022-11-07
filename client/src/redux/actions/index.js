@@ -5,6 +5,8 @@ export const POKE_DETAILS = "POKE_DETAILS";
 export const POKE_NAME = "POKE_NAME";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATACK = "ORDER_BY_ATACK";
+export const GET_TYPES = "GET_TYPES";
+
 export function getAllPokemons() {
   return async function (dispatch) {
     try {
@@ -45,6 +47,20 @@ export function getByName(query) {
         type: POKE_NAME,
         payload: fetchedPokes.data,
         loading: false,
+      });
+    } catch (err) {
+      console.log({ msg: err.message });
+    }
+  };
+}
+
+export function getTypes() {
+  return async function (dispatch) {
+    try {
+      const fetTypes = await axios(`http://localhost:3001/types`);
+      dispatch({
+        type: GET_TYPES,
+        payload: fetTypes.data,
       });
     } catch (err) {
       console.log({ msg: err.message });

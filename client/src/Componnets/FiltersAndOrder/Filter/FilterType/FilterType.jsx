@@ -1,16 +1,28 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getTypes } from "../../../../redux/actions";
 import "./filterType.css";
 
 const FilterType = () => {
   const allTypes = useSelector((state) => state.types);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getTypes());
+  }, []);
+
+  function handleChange(e) {
+    e.preventDefault();
+    dispatch(getTypes());
+  }
   return (
     <select className="types">
-      <option value="all">Tipos</option>
+      <option onChange={(e) => handleChange(e)} value="all">
+        Tipos
+      </option>
       {allTypes?.map((t) => {
         return (
           <option value={t.name} key={t.id}>
-            {t.name[0].toUpperCase() + t.name.slice(1)}
+            {t.name.toUpperCase() }
           </option>
         );
       })}
