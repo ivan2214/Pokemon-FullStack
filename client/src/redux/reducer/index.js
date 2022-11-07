@@ -1,5 +1,6 @@
 import {
   GET_ALL_POKEMONS,
+  GET_TYPES,
   ORDER_BY_ATACK,
   ORDER_BY_NAME,
   POKE_DETAILS,
@@ -60,7 +61,6 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         order: sortedPokemon,
         pokemons: sortedPokemon,
       };
-
     case ORDER_BY_ATACK:
       const pokes = [...state.pokemons];
       let orderByAttack =
@@ -90,7 +90,11 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         order: orderByAttack,
         pokemons: orderByAttack,
       };
-
+    case GET_TYPES:
+      return {
+        ...state,
+        types: payload,
+      };
     default:
       return state;
   }
