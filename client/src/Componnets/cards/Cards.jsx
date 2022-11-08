@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllPokemons } from "../../redux/actions";
+import { getAllPokemons, getTypes } from "../../redux/actions";
 import CardPokemon from "../CardPokemon/CardPokemon";
 import Spinner from "../Spinner/Spinner";
 import "./cards.css";
@@ -13,8 +13,12 @@ const Cards = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(getAllPokemons());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -24,7 +28,7 @@ const Cards = () => {
         <section className="cards-container">
           {pokemons?.map((p) => (
             <CardPokemon
-              key={p.pokeId}
+              key={p.pokeId + p.name}
               name={p.name}
               image={p.image}
               types={p.types}

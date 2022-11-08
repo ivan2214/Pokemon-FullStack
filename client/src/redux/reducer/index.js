@@ -1,4 +1,6 @@
 import {
+  FILTER_CREATE,
+  FILTER_TYPE,
   GET_ALL_POKEMONS,
   GET_TYPES,
   ORDER_BY_ATACK,
@@ -14,6 +16,7 @@ const initialState = {
   types: [],
   details: [],
   loading: true,
+  error: false,
 };
 
 const reducer = (state = initialState, { type, payload, loading }) => {
@@ -95,6 +98,21 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         ...state,
         types: payload,
       };
+    case FILTER_TYPE:
+    case FILTER_CREATE:
+      const allPokemones = [...state.allPokemons];
+      console.log(allPokemones);
+      let pokemonesFiltrados;
+      if (payload === "creados") {
+        pokemonesFiltrados = allPokemones.filter((p) => p.createInDataBase);
+      }
+      if (payload === "existing") {
+        pokemonesFiltrados = allPokemones.filter((p) => !p.createInDataBase);
+      }
+      if (payload === "all") {
+        pokemonesFiltrados = allPokemones;
+      }
+      return { ...state, pokemons: pokemonesFiltrados };
     default:
       return state;
   }
