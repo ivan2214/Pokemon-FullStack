@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllPokemons } from "../../redux/actions";
+import { getAllPokemons, getTypes } from "../../redux/actions";
 import CardPokemon from "../CardPokemon/CardPokemon";
 import Spinner from "../Spinner/Spinner";
 import "./cards.css";
@@ -11,6 +11,10 @@ const Cards = () => {
   let loading = useSelector((state) => state.loading);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getAllPokemons());

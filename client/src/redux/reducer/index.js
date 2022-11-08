@@ -1,4 +1,5 @@
 import {
+  FILTER_TYPE,
   GET_ALL_POKEMONS,
   GET_TYPES,
   ORDER_BY_ATACK,
@@ -95,6 +96,10 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         ...state,
         types: payload,
       };
+    case FILTER_TYPE:
+      console.log(payload);
+      return { ...state };
+
     default:
       return state;
   }

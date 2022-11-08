@@ -6,6 +6,7 @@ export const POKE_NAME = "POKE_NAME";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATACK = "ORDER_BY_ATACK";
 export const GET_TYPES = "GET_TYPES";
+export const FILTER_TYPE = "FILTER_TYPE";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -85,3 +86,12 @@ export const orderByAtack = (atack) => {
     payload: atack,
   };
 };
+
+//filtros
+
+export function filterTypes(type) {
+  return {
+    type: FILTER_TYPE,
+    payload: type,
+  };
+}
