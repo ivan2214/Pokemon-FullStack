@@ -16,7 +16,9 @@ const CardPokemon = ({ name, image, types, pokeId }) => {
         </picture>
         <div className="types">
           {types?.map((t) => (
-            <p className={t.name}>{t.name}</p>
+            <p key={pokeId + t} className={t}>
+              {t}
+            </p>
           ))}
         </div>
       </Link>

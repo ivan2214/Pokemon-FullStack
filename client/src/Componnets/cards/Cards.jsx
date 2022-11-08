@@ -14,7 +14,7 @@ const Cards = () => {
 
   useEffect(() => {
     dispatch(getAllPokemons());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -24,7 +24,7 @@ const Cards = () => {
         <section className="cards-container">
           {pokemons?.map((p) => (
             <CardPokemon
-              key={p.pokeId}
+              key={p.pokeId + p.name}
               name={p.name}
               image={p.image}
               types={p.types}

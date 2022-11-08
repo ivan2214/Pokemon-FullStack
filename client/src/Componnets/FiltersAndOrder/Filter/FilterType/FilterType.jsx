@@ -8,7 +8,7 @@ const FilterType = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTypes());
-  }, []);
+  }, [dispatch]);
 
   function handleChange(e) {
     e.preventDefault();

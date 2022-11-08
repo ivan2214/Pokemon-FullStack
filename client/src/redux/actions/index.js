@@ -10,7 +10,7 @@ export const GET_TYPES = "GET_TYPES";
 export function getAllPokemons() {
   return async function (dispatch) {
     try {
-      const fetchedPokes = await axios(`https://localhost:3001/pokemons`);
+      const fetchedPokes = await axios(`http://localhost:3001/pokemons`);
 
       dispatch({
         type: GET_ALL_POKEMONS,
@@ -26,7 +26,7 @@ export function getAllPokemons() {
 export function pokeDetails(id) {
   return async function (dispatch) {
     try {
-      const fetchedPokes = await axios(`https://localhost:3001/pokemons/${id}`);
+      const fetchedPokes = await axios(`http://localhost:3001/pokemons/${id}`);
       return dispatch({
         type: POKE_DETAILS,
         payload: fetchedPokes.data,
@@ -41,7 +41,7 @@ export function getByName(query) {
   return async function (dispatch) {
     try {
       const fetchedPokes = await axios(
-        `https://localhost:3001/pokemons/?name=${query}`
+        `http://localhost:3001/pokemons/?name=${query}`
       );
       return dispatch({
         type: POKE_NAME,
@@ -57,7 +57,7 @@ export function getByName(query) {
 export function getTypes() {
   return async function (dispatch) {
     try {
-      const fetTypes = await axios(`https://localhost:3001/types`);
+      const fetTypes = await axios(`http://localhost:3001/types`);
       dispatch({
         type: GET_TYPES,
         payload: fetTypes.data,
