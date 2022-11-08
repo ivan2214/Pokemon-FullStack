@@ -97,9 +97,22 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         types: payload,
       };
     case FILTER_TYPE:
-      console.log(payload);
-      return { ...state };
-
+      let type = payload;
+      console.log(state.allPokemons);
+      const filteredBy = state.allPokemons.filter((p) =>
+        p.types?.includes(type)
+      );
+      if (filteredBy.length > 0) {
+        return {
+          ...state,
+          pokemons: filteredBy,
+        };
+      } else {
+        return {
+          ...state,
+          pokemons: state.pokemons,
+        };
+      }
     default:
       return state;
   }
