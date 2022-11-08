@@ -7,6 +7,7 @@ export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_ATACK = "ORDER_BY_ATACK";
 export const GET_TYPES = "GET_TYPES";
 export const FILTER_TYPE = "FILTER_TYPE";
+export const FILTER_CREATE = "FILTER_CREATE";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -90,8 +91,17 @@ export const orderByAtack = (atack) => {
 //filtros
 
 export function filterTypes(type) {
+  console.log(type);
   return {
     type: FILTER_TYPE,
+    payload: type,
+  };
+}
+
+export function filterCreate(type) {
+  console.log(type);
+  return {
+    type: FILTER_CREATE,
     payload: type,
   };
 }

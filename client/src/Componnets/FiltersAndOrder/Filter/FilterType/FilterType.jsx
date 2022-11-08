@@ -12,7 +12,7 @@ const FilterType = () => {
   }
   return (
     <select onChange={(e) => handleChange(e)} className="types">
-      <option value="tipos">Tipos</option>
+      <option value="Tipos">Tipos</option>
       {allTypes?.map((t) => {
         return (
           <option value={t.name} key={t.id}>

@@ -23,11 +23,7 @@ const getApiInfo = async () => {
       height: el.data.height,
       weight: el.data.weight,
       image: el.data.sprites.other.dream_world.front_default,
-      types: el.data.types.map((el) => {
-        return {
-          name: el.type.name,
-        };
-      }),
+      types: el.data.types.map((t) => t.type.name),
     };
   });
 
@@ -35,7 +31,7 @@ const getApiInfo = async () => {
 };
 
 const getDbInfo = async () => {
-  //traigo los pokemones en la basee de datos una vez los creo se van a guardar en la basee de datos y tmb me traigo su type
+  //traigo los pokemones en la basee de datos una vez los creo se van a guardar en la basee de datos y tmb me traigo su type con solo sus nombres de tipo de pokemon
   return await Pokemon.findAll({
     include: {
       model: Type,
@@ -52,7 +48,7 @@ const getAllPokemons = async () => {
   try {
     const apiPokemon = await getApiInfo();
     const dbInfo = await getDbInfo();
-    const allInfo = [...apiPokemon, dbInfo];
+    const allInfo = dbInfo.concat(apiPokemon);
     return allInfo;
   } catch (error) {
     console.error(error);
