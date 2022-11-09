@@ -13,7 +13,7 @@ export function getAllPokemons() {
   return async function (dispatch) {
     try {
       const fetchedPokes = await axios(`http://localhost:3001/pokemons`);
-console.log(fetchedPokes.data);
+      console.log(fetchedPokes.data);
       dispatch({
         type: GET_ALL_POKEMONS,
         payload: fetchedPokes.data,
@@ -60,6 +60,7 @@ export function getTypes() {
   return async function (dispatch) {
     try {
       const fetTypes = await axios(`http://localhost:3001/types`);
+      console.log(fetTypes.data);
       dispatch({
         type: GET_TYPES,
         payload: fetTypes.data,

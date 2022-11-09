@@ -69,7 +69,6 @@ router.get("/:id", async (req, res, next) => {
     }
 
     let pokeFiltrado = await Pokemon.findByPk(id);
-    console.log(pokeFiltrado);
 
     return res.status(200).json(pokeFiltrado);
   } catch (error) {
