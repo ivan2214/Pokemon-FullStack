@@ -16,6 +16,10 @@
   margin: 0.5rem;
 }
 
+.containerCard{
+  border-radius: 20px;
+}
+
 .card-img-container{
   width: 60%;
 }
