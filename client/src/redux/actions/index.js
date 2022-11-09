@@ -13,7 +13,7 @@ export function getAllPokemons() {
   return async function (dispatch) {
     try {
       const fetchedPokes = await axios(`http://localhost:3001/pokemons`);
-      console.log(fetchedPokes.data);
+
       dispatch({
         type: GET_ALL_POKEMONS,
         payload: fetchedPokes.data,
@@ -60,7 +60,7 @@ export function getTypes() {
   return async function (dispatch) {
     try {
       const fetTypes = await axios(`http://localhost:3001/types`);
-      console.log(fetTypes.data);
+
       dispatch({
         type: GET_TYPES,
         payload: fetTypes.data,
@@ -74,7 +74,6 @@ export function getTypes() {
 //ORDENAMIENTOS
 
 export const orderByName = (order) => {
-  console.log(order);
   return {
     type: ORDER_BY_NAME,
     payload: order,
@@ -82,7 +81,6 @@ export const orderByName = (order) => {
 };
 
 export const orderByAtack = (atack) => {
-  console.log(atack);
   return {
     type: ORDER_BY_ATACK,
     payload: atack,
@@ -92,7 +90,6 @@ export const orderByAtack = (atack) => {
 //filtros
 
 export function filterTypes(type) {
-  console.log(type);
   return {
     type: FILTER_TYPE,
     payload: type,
@@ -100,7 +97,6 @@ export function filterTypes(type) {
 }
 
 export function filterCreate(type) {
-  console.log(type);
   return {
     type: FILTER_CREATE,
     payload: type,
