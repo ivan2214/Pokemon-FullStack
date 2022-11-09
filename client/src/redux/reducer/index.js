@@ -70,7 +70,7 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         payload === "atack"
           ? pokes.sort((a, b) => {
               if (a.attack > b.attack) {
-                console.log(a.attack, b.attack);
+                
                 return -1;
               }
               if (b.attack > a.attack) {
