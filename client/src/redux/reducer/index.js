@@ -99,9 +99,18 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         types: payload,
       };
     case FILTER_TYPE:
+      const todosPokemons = [...state.allPokemons];
+      let filterPoke =
+        payload === "Tipos"
+          ? todosPokemons
+          : todosPokemons?.filter((p) => p.types?.includes(payload));
+
+      return {
+        ...state,
+        pokemons: filterPoke,
+      };
     case FILTER_CREATE:
       const allPokemones = [...state.allPokemons];
-      console.log(allPokemones);
       let pokemonesFiltrados;
       if (payload === "creados") {
         pokemonesFiltrados = allPokemones.filter((p) => p.createInDataBase);
