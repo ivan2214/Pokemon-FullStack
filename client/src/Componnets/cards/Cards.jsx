@@ -20,11 +20,15 @@ const Cards = () => {
     dispatch(getAllPokemons());
   }, [dispatch]);
 
+  function reset() {
+    dispatch(getAllPokemons());
+  }
+
   return (
     <>
       {loading ? (
         <Spinner />
-      ) : (
+      ) : pokemons.length ? (
         <section className="cards-container">
           {pokemons?.map((p) => (
             <CardPokemon
@@ -35,6 +39,13 @@ const Cards = () => {
               pokeId={p.pokeId}
             />
           ))}
+        </section>
+      ) : (
+        <section className="cards-container">
+          <h1 className="">UPS ALGO SALIO MAL</h1>
+          <button onClick={reset} className="btn">
+            Recargar Pokemones !
+          </button>
         </section>
       )}
     </>
