@@ -13,7 +13,7 @@ export function getAllPokemons() {
   return async function (dispatch) {
     try {
       const fetchedPokes = await axios(`http://localhost:3001/pokemons`);
-
+console.log(fetchedPokes.data);
       dispatch({
         type: GET_ALL_POKEMONS,
         payload: fetchedPokes.data,
