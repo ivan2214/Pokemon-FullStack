@@ -4,11 +4,11 @@ const axios = require("axios");
 const { Op } = require("sequelize");
 const { route } = require(".");
 const { getAllPokemons } = require("./Controllers/controllers");
-const { Pokemon } = require("../db");
+const { Pokemon, Type } = require("../db");
 
 router.post("/", async (req, res) => {
   try {
-    const { name, life, attack, defense, speed, height, weight, image } =
+    const { name, life, attack, defense, speed, height, weight, image, types } =
       req.body;
 
     if (!name) {
@@ -24,7 +24,13 @@ router.post("/", async (req, res) => {
       height,
       weight,
       image,
+      types,
     });
+    const typeDb = await Type.findAll({
+      where: { name: types },
+    });
+
+    newPokemon.addType(typeDb);
     return res.status(200).json(newPokemon);
   } catch (error) {
     return res.status(404).json({ error: error.message });
