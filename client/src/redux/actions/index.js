@@ -44,8 +44,9 @@ export function getByName(query) {
   return async function (dispatch) {
     try {
       const fetchedPokes = await axios(
-        `http://localhost:3001/pokemons/?name=${query}`
+        `http://localhost:3001/pokemons?name=${query}`
       );
+      fetchedPokes.data.forEach((p) => console.log(p.name));
       return dispatch({
         type: POKE_NAME,
         payload: fetchedPokes.data,

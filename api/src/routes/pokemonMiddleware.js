@@ -36,15 +36,21 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res, next) => {
-  const { name } = req.query;
-  const pokemonInfoTotal = await getAllPokemons();
-  if (name) {
-    let pokemonName = await pokemonInfoTotal.filter((el) => el.name == name);
-    pokemonName.length
-      ? res.status(200).send(pokemonName)
-      : res.status(404).send("No se encontró el Pokemon");
-  } else {
-    res.status(200).send(pokemonInfoTotal);
+  try {
+    const { name } = req.query;
+    const pokemonInfoTotal = await getAllPokemons();
+    if (name) {
+      let pokemonName = await pokemonInfoTotal.filter(
+        (el) => el.name.toLowerCase() === name.toLowerCase()
+      );
+      console.log(pokemonName);
+      if (pokemonName.length < 1) throw new Error("Pokemon no encontrado ");
+      if (pokemonName.length) res.status(200).send(pokemonName);
+    } else {
+      res.status(200).send(pokemonInfoTotal);
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
