@@ -1,10 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import ash from "../../assets/images/ash.png";
+import poke from "../../assets/images/poke.png";
+import { getTypes, postPokemon } from "../../redux/actions";
 import "./CreatePokemon.css";
+
 const CreatedPokemon = () => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
+  const [errors] = useState({});
+  const history = useHistory();
   const [input, setInput] = useState({
     name: "",
     hp: "",
@@ -17,12 +24,40 @@ const CreatedPokemon = () => {
     types: [],
   });
 
-  
+  const handleChange = (e) => {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSelect = (ev) => {
+    if (!input.types.includes(ev.target.value)) {
+      setInput({
+        ...input,
+        types: [...input.types, ev.target.value],
+      });
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { name } = input;
+    if (name) {
+      dispatch(postPokemon(input));
+      alert("Pokemon created successfully!");
+      history.push("/home");
+    } else alert("Some field is missing information");
+  };
+
+  useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
 
   return (
     <div>
       <div className="navBar">
-        <img src={izq} alt="izq"></img>
         <Link to="/home">
           <button className="buttonHome">Return to home</button>
         </Link>
@@ -35,8 +70,8 @@ const CreatedPokemon = () => {
             <div className="title">Create your pokemon</div>
           </div>
 
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="form">
+          <div>
+            <form onSubmit={(event) => handleSubmit(event)} className="form">
               <div className="izq">
                 <div>
                   <div>Name:</div>
@@ -96,9 +131,8 @@ const CreatedPokemon = () => {
 
                 <div>
                   <select
-                    onChange={(e) => handleSelect(e)}
                     className="select"
-                    disabled={input.types.length >= 2}
+                    onChange={(ev) => handleSelect(ev)}
                     defaultValue="title"
                   >
                     <option value="title" disabled name="types">
@@ -118,12 +152,7 @@ const CreatedPokemon = () => {
                       return (
                         <li key={t} className="types">
                           {t[0].toUpperCase() + t.slice(1)}
-                          <button
-                            onClick={() => handleDeleteType(t)}
-                            className="deleteButton"
-                          >
-                            x
-                          </button>
+                          <button className="deleteButton">x</button>
                         </li>
                       );
                     })}
@@ -177,7 +206,7 @@ const CreatedPokemon = () => {
                 <div>
                   <div>Image:</div>
                   <input
-                    type="text"
+                    type="file"
                     value={input.image}
                     name="image"
                     onChange={(e) => handleChange(e)}
@@ -187,12 +216,12 @@ const CreatedPokemon = () => {
                   {errors.image && <div className="error">{errors.image}</div>}
                 </div>
 
-                <button type="submit" disabled={btnDisabled} className="button">
+                <button type="submit" className="button">
                   Create
                 </button>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

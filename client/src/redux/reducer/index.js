@@ -7,6 +7,7 @@ import {
   ORDER_BY_NAME,
   POKE_DETAILS,
   POKE_NAME,
+  POST_POKEMON,
 } from "../actions";
 
 const initialState = {
@@ -70,7 +71,6 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         payload === "atack"
           ? pokes.sort((a, b) => {
               if (a.attack > b.attack) {
-                console.log(a.attack, b.attack);
                 return -1;
               }
               if (b.attack > a.attack) {
@@ -122,6 +122,9 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         pokemonesFiltrados = allPokemones;
       }
       return { ...state, pokemons: pokemonesFiltrados };
+    case POST_POKEMON:
+      return { ...state };
+
     default:
       return state;
   }

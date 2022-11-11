@@ -8,6 +8,7 @@
   max-width: 100%;
   gap: 2.5rem;
   margin-top: 1.5rem;
+  transition: all 1s;
 }
 
 @media (min-width: 768px) {
