@@ -8,6 +8,7 @@ export const ORDER_BY_ATACK = "ORDER_BY_ATACK";
 export const GET_TYPES = "GET_TYPES";
 export const FILTER_TYPE = "FILTER_TYPE";
 export const FILTER_CREATE = "FILTER_CREATE";
+export const POST_POKEMON = "POST_POKEMON";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -100,5 +101,18 @@ export function filterCreate(type) {
   return {
     type: FILTER_CREATE,
     payload: type,
+  };
+}
+
+// crear pokemon
+
+export function postPokemon(dataPokemon) {
+  return async function (dispatch) {
+    axios.post("http://localhost:3001/pokemons", dataPokemon).then((data) =>
+      dispatch({
+        type: POST_POKEMON,
+        payload: data,
+      })
+    );
   };
 }

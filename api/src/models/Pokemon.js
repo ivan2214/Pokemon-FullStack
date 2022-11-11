@@ -10,13 +10,12 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      life: {
+      hp: {
         type: DataTypes.INTEGER,
       },
       attack: {
@@ -36,10 +35,7 @@ module.exports = (sequelize) => {
       },
 
       image: {
-        type: DataTypes.STRING,
-        validate: {
-          isUrl: true,
-        },
+        type: DataTypes.BLOB,
       },
       createInDataBase: {
         type: DataTypes.BOOLEAN,

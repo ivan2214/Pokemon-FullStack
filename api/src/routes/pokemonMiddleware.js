@@ -8,7 +8,7 @@ const { Pokemon, Type } = require("../db");
 
 router.post("/", async (req, res) => {
   try {
-    const { name, life, attack, defense, speed, height, weight, image, types } =
+    const { name, hp, attack, defense, speed, height, weight, image, types } =
       req.body;
 
     if (!name) {
@@ -17,19 +17,17 @@ router.post("/", async (req, res) => {
 
     const newPokemon = await Pokemon.create({
       name,
-      life,
-      attack,
-      defense,
-      speed,
-      height,
-      weight,
+      hp: Number(hp),
+      attack: Number(attack),
+      defense: Number(defense),
+      speed: Number(speed),
+      height: Number(height),
+      weight: Number(weight),
       image,
-      types,
     });
     const typeDb = await Type.findAll({
       where: { name: types },
     });
-
     newPokemon.addType(typeDb);
     return res.status(200).json(newPokemon);
   } catch (error) {
@@ -56,21 +54,13 @@ router.get("/:id", async (req, res, next) => {
 
     const pokemonInfoTotal = await getAllPokemons();
 
-    if (pokemonInfoTotal.length < 1) {
-      throw new Error("Ups Hubo un errpr Pokemones no encontrados");
-    }
-
-    if (id.length <= 2) {
+    if (id.length) {
       let pokeFiltrado = await pokemonInfoTotal.filter((el) => el.pokeId == id);
       if (pokeFiltrado.length < 1) {
         throw new Error("Pokemon no encontrado");
       }
       return res.status(200).send(pokeFiltrado);
     }
-
-    let pokeFiltrado = await Pokemon.findByPk(id);
-
-    return res.status(200).json(pokeFiltrado);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
