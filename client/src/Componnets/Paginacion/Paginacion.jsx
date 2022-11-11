@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button/Button";
 import "./paginacion.css";
 
 export const Paginacion = ({
@@ -18,28 +19,30 @@ export const Paginacion = ({
       <ul>
         {paginaActual > 1 && (
           <li>
-            <button onClick={() => setPaginaActual(paginaActual - 1)}>
-              Anterior
-            </button>
+            <Button
+              onClick={() => setPaginaActual(paginaActual - 1)}
+              value="anterior"
+            />
           </li>
         )}
         <div className="divNumbers">
           {numberPages.map((n) => (
             <li key={n}>
-              <button
+              <a
                 onClick={() => setPaginaActual(n)}
                 className={` ${n === paginaActual ? "is-active" : ""} `}
               >
                 {n}
-              </button>
+              </a>
             </li>
           ))}
         </div>
         {paginaActual < numberPages.length && (
           <li>
-            <button onClick={() => setPaginaActual(paginaActual + 1)}>
-              Siguiente
-            </button>
+            <Button
+              onClick={() => setPaginaActual(paginaActual + 1)}
+              value="Siguiente"
+            />
           </li>
         )}
       </ul>

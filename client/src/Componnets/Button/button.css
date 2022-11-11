@@ -1,0 +1,51 @@
+.buttonSecondary {
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #17356C;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in;
+  z-index: 1;
+  cursor: pointer ;
+}
+
+.buttonSecondary::before,
+.buttonSecondary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transform: skew(15deg);
+  transition: all 0.5s;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.buttonSecondary::before {
+  left: -10px;
+  background: #17356C;
+}
+
+.buttonSecondary::after {
+  right: -10px;
+  background: #33579A;
+}
+
+.buttonSecondary:hover::before,
+.buttonSecondary:hover::after {
+  width: 58%;
+}
+
+.buttonSecondary:hover span {
+  color: #e0aaff;
+  transition: 0.3s;
+}
+
+.buttonSecondary span {
+  color: #03045e;
+  font-size: 18px;
+  transition: all 0.3s ease-in;
+}

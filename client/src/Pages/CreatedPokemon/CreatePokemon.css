@@ -36,10 +36,11 @@ ul {
 }
 
 .title {
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-family: "Rubik", sans-serif;
   font-weight: 700;
   font-size: 26px;
+  text-transform: capitalize;
 }
 
 .poke {
