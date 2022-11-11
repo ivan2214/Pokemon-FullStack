@@ -14,15 +14,18 @@
   background-color: #fff;
   min-width: 250px;
   margin: 0.5rem;
-  
 }
 
-.containerCard{
+.containerCard {
   border-radius: 20px;
-  animation: myAnim 1s ease 0s 1 normal forwards;animation: myAnim 1s ease 0s 1 normal forwards;
+  animation: myAnim 1s ease 0s 1 normal forwards;
+  animation: myAnim 1s ease 0s 1 normal forwards;
+}
+.title {
+  text-transform: capitalize;
 }
 
-.card-img-container{
+.card-img-container {
   width: 60%;
 }
 
@@ -35,6 +38,7 @@
   font-weight: 600;
   font-size: 1.7em;
   color: #66625c;
+  text-transform: capitalize;
 }
 
 .types {
@@ -69,54 +73,53 @@
 }
 
 .bug {
-  background-color: #9cb820;
+  background-color: #9cb820ac;
 }
 
 .fire {
-  background-color: #f08030;
+  background-color: #f08030ac;
 }
 
 .grass {
-  background-color: #22c02a;
+  background-color: #22c02aac;
 }
 
 .poison {
-  background-color: #a040a0;
+  background-color: #a040a0ac;
 }
 
 .water {
-  background-color: #6890f0;
+  background-color: #6890f0ac;
 }
 
 .flying {
-  background-color: #9096f0;
+  background-color: #9096f0ac;
 }
 
 .normal {
-  background-color: #a8a8a8;
+  background-color: #a8a8a8ac;
 }
 
 .fairy {
-  background-color: #f09ad9;
+  background-color: #f09ad9ac;
 }
 
 .electric {
-  background-color: #c09643;
+  background-color: #c09643ac;
 }
 
 .ground {
-  background-color: #e0b668;
+  background-color: #e0b668ac;
 }
 
-
 @keyframes myAnim {
-	0% {
-		opacity: 0;
-		transform: translateX(-50px);
-	}
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
 
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
