@@ -1,4 +1,5 @@
 import {
+  DELETE_POKEMON,
   FILTER_CREATE,
   FILTER_TYPE,
   GET_ALL_POKEMONS,
@@ -124,7 +125,10 @@ const reducer = (state = initialState, { type, payload, loading }) => {
       return { ...state, pokemons: pokemonesFiltrados };
     case POST_POKEMON:
       return { ...state };
-
+    case DELETE_POKEMON:
+      return {
+        ...state,
+      };
     default:
       return state;
   }

@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import ash from "../../assets/images/ash.png";
 import poke from "../../assets/images/poke.png";
-import { getTypes, postPokemon } from "../../redux/actions";
+import { getAllPokemons, getTypes, postPokemon } from "../../redux/actions";
+import validate from "../../utils/validate";
 import "./CreatePokemon.css";
 
 const CreatedPokemon = () => {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
-  const [errors] = useState({});
+  const [errors, setErrors] = useState({});
   const history = useHistory();
   const [input, setInput] = useState({
     name: "",
@@ -24,11 +25,29 @@ const CreatedPokemon = () => {
     types: [],
   });
 
+  useEffect(() => {
+    dispatch(getTypes());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setErrors(
+      validate({
+        ...input,
+      })
+    );
+  }, [input]);
+
   const handleChange = (e) => {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleSelect = (ev) => {
@@ -38,22 +57,36 @@ const CreatedPokemon = () => {
         types: [...input.types, ev.target.value],
       });
     }
+    if (input.types.includes(ev.target.value)) {
+      alert("Tipo ya seleccionado");
+    }
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const { name } = input;
-    if (name) {
-      dispatch(postPokemon(input));
-      alert("Pokemon created successfully!");
-      history.push("/home");
-    } else alert("Some field is missing information");
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+    dispatch(postPokemon(input));
+    alert("Pokemon creado");
+    setInput({
+      name: "",
+      hp: "",
+      attack: "",
+      defense: "",
+      speed: "",
+      height: "",
+      weight: "",
+      image: "",
+      types: [],
+    });
+    history.push("/home");
+    dispatch(getAllPokemons());
   };
 
-  useEffect(() => {
-    dispatch(getTypes());
-  }, [dispatch]);
+  const handleDeleteType = (ev) => {
+    setInput({
+      ...input,
+      types: input.types.filter((t) => t !== ev),
+    });
+  };
 
   return (
     <div>
@@ -64,7 +97,6 @@ const CreatedPokemon = () => {
       </div>
       <div className="contGral">
         <div className="cardCreate">
-          <img src={ash} alt="ash" className="ash" />
           <div className="redTitle">
             <img src={poke} alt="poke" className="poke"></img>
             <div className="title">Create your pokemon</div>
@@ -93,7 +125,7 @@ const CreatedPokemon = () => {
                     value={input.hp}
                     name="hp"
                     onChange={(e) => handleChange(e)}
-                    placeholder="1 - 150"
+                    placeholder="1 - 1500"
                     className="inputs"
                   />
                   {errors.hp && <div className="error">{errors.hp}</div>}
@@ -106,7 +138,7 @@ const CreatedPokemon = () => {
                     value={input.attack}
                     name="attack"
                     onChange={(e) => handleChange(e)}
-                    placeholder="1 - 150"
+                    placeholder="1 - 200"
                     className="inputs"
                   />
                   {errors.attack && (
@@ -121,7 +153,7 @@ const CreatedPokemon = () => {
                     value={input.defense}
                     name="defense"
                     onChange={(e) => handleChange(e)}
-                    placeholder="1 - 150"
+                    placeholder="1 - 1000"
                     className="inputs"
                   />
                   {errors.defense && (
@@ -150,10 +182,15 @@ const CreatedPokemon = () => {
                   <ul className="types">
                     {input.types.map((t) => {
                       return (
-                        <li key={t} className="types">
+                        <a key={t} className="tipos">
                           {t[0].toUpperCase() + t.slice(1)}
-                          <button className="deleteButton">x</button>
-                        </li>
+                          <a
+                            onClick={() => handleDeleteType(t)}
+                            className="delete"
+                          >
+                            x
+                          </a>
+                        </a>
                       );
                     })}
                   </ul>
@@ -169,7 +206,7 @@ const CreatedPokemon = () => {
                     value={input.speed}
                     name="speed"
                     onChange={(e) => handleChange(e)}
-                    placeholder="1 - 150"
+                    placeholder="1 - 1500"
                     className="inputs"
                   />
                   {errors.speed && <div className="error">{errors.speed}</div>}
@@ -206,7 +243,7 @@ const CreatedPokemon = () => {
                 <div>
                   <div>Image:</div>
                   <input
-                    type="file"
+                    type="text"
                     value={input.image}
                     name="image"
                     onChange={(e) => handleChange(e)}
@@ -216,9 +253,11 @@ const CreatedPokemon = () => {
                   {errors.image && <div className="error">{errors.image}</div>}
                 </div>
 
-                <button type="submit" className="button">
-                  Create
-                </button>
+                {Object.keys(errors).length < 1 && (
+                  <button type="submit" className="button">
+                    Create
+                  </button>
+                )}
               </div>
             </form>
           </div>

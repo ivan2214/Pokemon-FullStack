@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { pokeDetails } from "../../redux/actions";
+import { Link, useHistory, useParams } from "react-router-dom";
+import {
+  deletePokemon,
+  getAllPokemons,
+  pokeDetails,
+} from "../../redux/actions";
 import pokemonImg from "../../assets/images/pokemon.png";
 import pokeball from "../../assets/giftPokemon.gif";
 
@@ -9,11 +13,19 @@ import "./details.css";
 const CardDetail = () => {
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.details);
-
+  const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
     dispatch(pokeDetails(id));
   }, [dispatch, id]);
+
+  const handlerDelete = (e) => {
+    e.preventDefault();
+    dispatch(deletePokemon(id));
+    alert("Pokemon eliminado");
+    history.push("/home");
+    dispatch(getAllPokemons());
+  };
 
   return (
     <>
@@ -130,6 +142,17 @@ const CardDetail = () => {
                         ></div>
                       </div>
                     </div>
+
+                    {pokemon[0].createInDataBase && (
+                      <div className={"buttons"}>
+                        <button
+                          onClick={(e) => handlerDelete(e)}
+                          className={"deleteButton"}
+                        >
+                          Delete Pokemon
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

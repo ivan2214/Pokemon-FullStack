@@ -9,6 +9,7 @@ export const GET_TYPES = "GET_TYPES";
 export const FILTER_TYPE = "FILTER_TYPE";
 export const FILTER_CREATE = "FILTER_CREATE";
 export const POST_POKEMON = "POST_POKEMON";
+export const DELETE_POKEMON = "DELETE_POKEMON";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -115,5 +116,18 @@ export function postPokemon(dataPokemon) {
         payload: data,
       })
     );
+  };
+}
+
+export function deletePokemon(pokemonId) {
+  return async function (dispatch) {
+    try {
+      await axios.delete(`http://localhost:3001/pokemons/${pokemonId}`);
+      return dispatch({
+        type: DELETE_POKEMON,
+      });
+    } catch (error) {
+      console.log("No puedo eliminar el pokemon", error);
+    }
   };
 }
