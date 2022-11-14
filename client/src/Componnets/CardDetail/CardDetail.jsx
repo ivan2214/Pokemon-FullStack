@@ -9,7 +9,7 @@ import "./details.css";
 const CardDetail = () => {
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.details);
-  console.log();
+
   const { id } = useParams();
   useEffect(() => {
     dispatch(pokeDetails(id));
@@ -22,12 +22,18 @@ const CardDetail = () => {
           <img src={pokemonImg} alt="" className="imgNav" loading="lazi" />
         </Link>
       </div>
-
+      {/* pokemon[0].types[0] */}
       <div>
         {pokemon.length ? (
           <div className="contGral">
             <div className="contRed">
-              <div className={`${pokemon[0].types[0]} contGris`}>
+              <div
+                className={`${
+                  typeof pokemon[0].types == "object"
+                    ? pokemon[0].types.name
+                    : pokemon[0].types[0]
+                } contGris`}
+              >
                 <div className="contIzq">
                   <div className="circulo">
                     <img
@@ -39,16 +45,20 @@ const CardDetail = () => {
                   <div className="infoBasica">
                     <h2 className="name">{pokemon[0].name}</h2>
                     <ul className="types">
-                      {pokemon[0].types?.map((t) => (
-                        <div
-                          key={
-                             pokemon[0].name + " " + t
-                          }
-                          className={t}
-                        >
-                          {t}
-                        </div>
-                      ))}
+                      {pokemon[0].types?.map((t) => {
+                        return (
+                          <div
+                            key={
+                              pokemon[0].name + " " + typeof t === "object"
+                                ? t.name
+                                : t
+                            }
+                            className={typeof t === "object" ? t.name : t}
+                          >
+                            {typeof t === "object" ? t.name : t}
+                          </div>
+                        );
+                      })}
                     </ul>
                     <div className="id">#ID {pokemon[0].pokeId}</div>
                   </div>
