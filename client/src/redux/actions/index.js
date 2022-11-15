@@ -10,6 +10,7 @@ export const FILTER_TYPE = "FILTER_TYPE";
 export const FILTER_CREATE = "FILTER_CREATE";
 export const POST_POKEMON = "POST_POKEMON";
 export const DELETE_POKEMON = "DELETE_POKEMON";
+export const EDIT_POKEMON = "EDIT_POKEMON";
 
 export function getAllPokemons() {
   return async function (dispatch) {
@@ -47,7 +48,7 @@ export function getByName(query) {
       const fetchedPokes = await axios(
         `http://localhost:3001/pokemons?name=${query}`
       );
-      fetchedPokes.data.forEach((p) => console.log(p.name));
+
       return dispatch({
         type: POKE_NAME,
         payload: fetchedPokes.data,
@@ -128,6 +129,25 @@ export function deletePokemon(pokemonId) {
       });
     } catch (error) {
       console.log("No puedo eliminar el pokemon", error);
+    }
+  };
+}
+
+// editar pokemon
+
+export function editPokemon(id, pokemonEditado) {
+  return async function (dispatch) {
+    try {
+      const json = await axios.put(
+        `http://localhost:3001/pokemons/editar/${id}`,
+        pokemonEditado
+      );
+      return dispatch({
+        type: EDIT_POKEMON,
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 }

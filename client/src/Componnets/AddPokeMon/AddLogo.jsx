@@ -6,7 +6,7 @@ const AddLogo = () => {
   return (
     <>
       <Link to="/created" className="searchButton">
-        <img src={plus} alt="buscar" className="buscar"></img>
+        <img loading="lazi" src={plus} alt="buscar" className="buscar"></img>
       </Link>
       <p>Agrega tu pokemon !!</p>
     </>

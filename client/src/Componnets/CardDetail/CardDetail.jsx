@@ -49,6 +49,7 @@ const CardDetail = () => {
                 <div className="contIzq">
                   <div className="circulo">
                     <img
+                      loading="lazi"
                       src={pokemon[0].image}
                       alt="imagen-del-pokemon"
                       className="image"
@@ -145,9 +146,15 @@ const CardDetail = () => {
 
                     {pokemon[0].createInDataBase && (
                       <div className={"buttons"}>
+                        <Link
+                          to={`/pokemons/editar/${id}`}
+                          className={`${"editPokemon"} `}
+                        >
+                          Edit Pokemon
+                        </Link>
                         <button
                           onClick={(e) => handlerDelete(e)}
-                          className={"deleteButton"}
+                          className={"buttonRed deleteButton"}
                         >
                           Delete Pokemon
                         </button>
@@ -160,7 +167,12 @@ const CardDetail = () => {
           </div>
         ) : (
           <div className="poke">
-            <img src={pokeball} alt="pokeball" className="pokeball" />
+            <img
+              loading="lazi"
+              src={pokeball}
+              alt="pokeball"
+              className="pokeball"
+            />
           </div>
         )}
       </div>

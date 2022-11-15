@@ -1,5 +1,6 @@
 import {
   DELETE_POKEMON,
+  EDIT_POKEMON,
   FILTER_CREATE,
   FILTER_TYPE,
   GET_ALL_POKEMONS,
@@ -126,6 +127,10 @@ const reducer = (state = initialState, { type, payload, loading }) => {
     case POST_POKEMON:
       return { ...state };
     case DELETE_POKEMON:
+      return {
+        ...state,
+      };
+    case EDIT_POKEMON:
       return {
         ...state,
       };

@@ -19,8 +19,7 @@ const Cards = () => {
     : pokemons;
   const totalPokemons = pokemons.length;
   const dispatch = useDispatch();
-  console.log(pokemonsPaginados);
-  console.log(pokemons);
+
   useEffect(() => {
     dispatch(getTypes());
   }, [dispatch]);

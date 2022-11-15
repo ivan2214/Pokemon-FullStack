@@ -23,7 +23,7 @@ const Landing = () => {
       </section>
       <section className="sec-img">
         <picture>
-          <img src={img} alt="" />
+          <img loading="lazi" src={img} alt="" />
         </picture>
       </section>
     </main>
