@@ -170,7 +170,7 @@ const CreatedPokemon = () => {
                       Types
                     </option>
                     {types.map((t) => {
-                      console.log(t);
+                      console.log(input);
                       return (
                         <option value={t.name} key={t.name + t.id} className="options">
                           {t.name}
@@ -183,7 +183,7 @@ const CreatedPokemon = () => {
                     {input.types.map((t) => {
                       return (
                         <button key={t} className="tipos">
-                          {t[0].toUpperCase() + t.slice(1)}
+                          {t.toUpperCase()}
                           <button
                             onClick={() => handleDeleteType(t)}
                             className="delete"

@@ -92,8 +92,7 @@ const EditPokemon = () => {
       image: "",
       types: [],
     });
-    history.push(`/pokemons/${id}`);
-    dispatch(pokeDetails(id));
+    history.push("/home");
     dispatch(getAllPokemons());
   };
 

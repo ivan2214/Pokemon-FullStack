@@ -54,7 +54,6 @@ router.get("/", async (req, res, next) => {
       let pokemonName = await pokemonInfoTotal.filter(
         (el) => el.name.toLowerCase() === name.toLowerCase()
       );
-      console.log(pokemonName);
       if (pokemonName.length < 1) throw new Error("Pokemon no encontrado ");
       if (pokemonName.length) res.status(200).send(pokemonName);
     } else {
@@ -112,7 +111,6 @@ router.put("/editar/:id", async (req, res) => {
       }
 
       const pokeEdit = await Pokemon.findByPk(id);
-      console.log(pokeEdit);
       await pokeEdit.update(
         {
           name,
