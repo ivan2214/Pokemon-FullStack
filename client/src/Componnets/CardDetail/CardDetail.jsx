@@ -18,7 +18,7 @@ const CardDetail = () => {
   useEffect(() => {
     dispatch(pokeDetails(id));
   }, [dispatch, id]);
-  console.log(pokemon[0]?.types[0]);
+
   const handlerDelete = (e) => {
     e.preventDefault();
     dispatch(deletePokemon(id));

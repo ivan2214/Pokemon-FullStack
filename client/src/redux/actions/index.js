@@ -110,6 +110,7 @@ export function filterCreate(type) {
 // crear pokemon
 
 export function postPokemon(dataPokemon) {
+  console.log(dataPokemon);
   return async function (dispatch) {
     axios.post("http://localhost:3001/pokemons", dataPokemon).then((data) =>
       dispatch({

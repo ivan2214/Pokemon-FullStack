@@ -11,8 +11,6 @@ router.post("/", async (req, res) => {
     const { name, hp, attack, defense, speed, height, weight, image, types } =
       req.body;
 
-    console.log("image info : " + image);
-
     let urlDeImagen = "";
 
     if (image.length) {
@@ -102,9 +100,7 @@ router.put("/editar/:id", async (req, res) => {
     const { name, hp, attack, defense, speed, height, weight, image, types } =
       req.body;
     const { id } = req.params;
-
-    let urlImage = "";
-
+    console.log("type info : " + types[0]);
     if (id) {
       if (!name) {
         throw new Error("Faltan Parametros obligatorios");
@@ -120,6 +116,8 @@ router.put("/editar/:id", async (req, res) => {
           speed: Number(speed),
           height: Number(height),
           weight: Number(weight),
+          image,
+          types,
         },
         {
           where: { id: id },
@@ -128,8 +126,9 @@ router.put("/editar/:id", async (req, res) => {
       const typeDb = await Type.findAll({
         where: { name: types },
       });
-
-      await pokeEdit.setType(typeDb);
+      await pokeEdit.addType(typeDb);
+      await pokeEdit.setTypes(typeDb);
+      await pokeEdit.save();
       return res.status(200).json(pokeEdit);
     }
   } catch (error) {

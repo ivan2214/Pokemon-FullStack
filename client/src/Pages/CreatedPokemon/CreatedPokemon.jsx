@@ -170,9 +170,12 @@ const CreatedPokemon = () => {
                       Types
                     </option>
                     {types.map((t) => {
-                      console.log(input);
                       return (
-                        <option value={t.name} key={t.name + t.id} className="options">
+                        <option
+                          value={t.name}
+                          key={t.name + t.id}
+                          className="options"
+                        >
                           {t.name}
                         </option>
                       );
