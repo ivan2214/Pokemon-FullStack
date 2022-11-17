@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 
     let urlDeImagen = "";
 
-    if (image) {
+    if (image.length) {
       urlDeImagen = image;
     } else {
       urlDeImagen =

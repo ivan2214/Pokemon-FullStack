@@ -18,7 +18,7 @@ const CardDetail = () => {
   useEffect(() => {
     dispatch(pokeDetails(id));
   }, [dispatch, id]);
-
+  console.log(pokemon[0]?.types[0]);
   const handlerDelete = (e) => {
     e.preventDefault();
     dispatch(deletePokemon(id));
@@ -41,9 +41,9 @@ const CardDetail = () => {
             <div className="contRed">
               <div
                 className={`${
-                  typeof pokemon[0].types == "object"
-                    ? pokemon[0].types.name
-                    : pokemon[0].types[0]
+                  typeof pokemon[0].types[0] == "object"
+                    ? pokemon[0]?.types[0].name
+                    : pokemon[0]?.types[0]
                 } contGris`}
               >
                 <div className="contIzq">
@@ -80,12 +80,12 @@ const CardDetail = () => {
                 <div className="contDer">
                   <div className="alturaPeso">
                     <div className="medidas">
-                      <div className="title">Height</div>
+                      <div className="titleDetails">Height</div>
                       <div>{pokemon[0].height} m</div>
                     </div>
 
                     <div className="medidas">
-                      <div className="title">Weight</div>
+                      <div className="titleDetails">Weight</div>
                       <div>{pokemon[0].weight} kg</div>
                     </div>
                   </div>
