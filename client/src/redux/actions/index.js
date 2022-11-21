@@ -85,6 +85,7 @@ export const orderByName = (order) => {
 };
 
 export const orderByAtack = (atack) => {
+  console.log(atack);
   return {
     type: ORDER_BY_ATACK,
     payload: atack,

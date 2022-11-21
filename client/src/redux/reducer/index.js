@@ -69,26 +69,33 @@ const reducer = (state = initialState, { type, payload, loading }) => {
       };
     case ORDER_BY_ATACK:
       const pokes = [...state.pokemons];
-      let orderByAttack =
-        payload === "atack"
-          ? pokes.sort((a, b) => {
-              if (a.attack > b.attack) {
-                return -1;
-              }
-              if (b.attack > a.attack) {
-                return 1;
-              }
-              return 0;
-            })
-          : pokes.sort((a, b) => {
-              if (a.attack > b.attack) {
-                return 1;
-              }
-              if (b.attack > a.attack) {
-                return -1;
-              }
-              return 0;
-            });
+      let orderByAttack;
+      console.log(payload);
+
+      if (payload === "ascFuerza") {
+        orderByAttack = pokes.sort((a, b) => {
+          if (a.attack > b.attack) {
+            return -1;
+          }
+          if (b.attack > a.attack) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+
+      if (payload === "descFuerza") {
+        console.log(payload);
+        orderByAttack = pokes.sort((a, b) => {
+          if (a.attack > b.attack) {
+            return 1;
+          }
+          if (b.attack > a.attack) {
+            return -1;
+          }
+          return 0;
+        });
+      }
 
       return {
         ...state,

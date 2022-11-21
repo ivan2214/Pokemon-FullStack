@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPokemons, orderByAtack, orderByName } from "../../../redux/actions";
+import {
+  getAllPokemons,
+  orderByAtack,
+  orderByName,
+} from "../../../redux/actions";
 import "./Order.css";
 const Order = () => {
   const dispatch = useDispatch();
@@ -18,7 +22,7 @@ const Order = () => {
       dispatch(orderByName(ev.target.value));
     }
 
-    if (ev.target.value === "atack") {
+    if (ev.target.value === "ascFuerza" || ev.target.value === "descFuerza") {
       ev.preventDefault();
       dispatch(orderByAtack(ev.target.value));
     }
@@ -33,7 +37,8 @@ const Order = () => {
       <option value="default">Order</option>
       <option value="asc">Ordenar A-Z</option>
       <option value="desc">Ordenar Z-A</option>
-      <option value="atack">Ordenar Fuerza</option>
+      <option value="ascFuerza">Ordenar Fuerza (asc)</option>
+      <option value="descFuerza">Ordenar Fuerza (desc)</option>
     </select>
   );
 };
