@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import poke from "../../assets/images/poke.png";
-import { getAllPokemons, getTypes, postPokemon } from "../../redux/actions";
+import { useDispatch } from "react-redux";
+import { useHistory, useParams, Link } from "react-router-dom";
+import {
+  editPokemon,
+  getAllPokemons,
+  getTypes,
+  pokeDetails,
+} from "../../redux/actions";
 import validate from "../../utils/validate";
-import "./CreatePokemon.css";
+import poke from "../../assets/images/poke.png";
 
-const CreatedPokemon = () => {
+const EditPokemon = () => {
   const dispatch = useDispatch();
-  const types = useSelector((state) => state.types);
-  const [errors, setErrors] = useState({});
+  const { id } = useParams();
   const history = useHistory();
+
+  const allPokemons = useSelector((state) => state.pokemons);
+  const pokemonDetail = useSelector((state) => state.details);
+  const types = useSelector((state) => state.types);
+
+  const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
     hp: "",
@@ -26,7 +35,14 @@ const CreatedPokemon = () => {
 
   useEffect(() => {
     dispatch(getTypes());
-  }, [dispatch]);
+    dispatch(pokeDetails(id));
+  }, [dispatch, allPokemons.length, id]);
+
+  useEffect(() => {
+    if (pokemonDetail.length) {
+      setInput(pokemonDetail[0]);
+    }
+  }, [pokemonDetail.length, pokemonDetail]);
 
   useEffect(() => {
     setErrors(
@@ -36,19 +52,19 @@ const CreatedPokemon = () => {
     );
   }, [input]);
 
-  const handleChange = (e) => {
+  const handleChange = (ev) => {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [ev.target.name]: ev.target.value.toLowerCase(),
     });
+
     setErrors(
       validate({
         ...input,
-        [e.target.name]: e.target.value,
+        [ev.target.name]: ev.target.value,
       })
     );
   };
-
   const handleSelect = (ev) => {
     if (!input.types.includes(ev.target.value)) {
       setInput({
@@ -63,8 +79,8 @@ const CreatedPokemon = () => {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    dispatch(postPokemon(input));
-    alert("Pokemon creado");
+    dispatch(editPokemon(id, input));
+    alert("Pokemon editado");
     setInput({
       name: "",
       hp: "",
@@ -91,14 +107,14 @@ const CreatedPokemon = () => {
     <div>
       <div className="navBar">
         <Link to="/home">
-          <button className="buttonHome">Return to home</button>
+          <button className="buttonHome">Volver al home</button>
         </Link>
       </div>
       <div className="contGral">
         <div className="cardCreate">
           <div className="redTitle">
             <img loading="lazi" src={poke} alt="poke" className="poke"></img>
-            <div className="title">Crear tu Pokemon!</div>
+            <div className="title">Edita tu Pokemon!!</div>
           </div>
 
           <div>
@@ -185,14 +201,13 @@ const CreatedPokemon = () => {
                   <ul className="types">
                     {input.types.map((t) => {
                       return (
-                        <button key={t} className="tipos">
-                          {t.toUpperCase()}
-                          <button
-                            onClick={() => handleDeleteType(t)}
-                            className="delete"
-                          >
-                            x
-                          </button>
+                        <button
+                          key={` ${t.name}  ${pokemonDetail.pokeId} `}
+                          onClick={() => handleDeleteType(t)}
+                          className="tipos"
+                        >
+                          {t.name}
+                          <p>x</p>
                         </button>
                       );
                     })}
@@ -258,7 +273,7 @@ const CreatedPokemon = () => {
 
                 {Object.keys(errors).length < 1 && (
                   <button type="submit" className="button">
-                    Create
+                    Editar
                   </button>
                 )}
               </div>
@@ -270,4 +285,4 @@ const CreatedPokemon = () => {
   );
 };
 
-export default CreatedPokemon;
+export default EditPokemon;

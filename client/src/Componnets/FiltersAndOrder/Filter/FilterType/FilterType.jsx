@@ -1,14 +1,18 @@
 import { useSelector, useDispatch } from "react-redux";
-import { filterTypes } from "../../../../redux/actions";
+import { filterTypes, getAllPokemons } from "../../../../redux/actions";
 import "./filterType.css";
 
 const FilterType = () => {
   const allTypes = useSelector((state) => state.types);
   const dispatch = useDispatch();
 
-   function handleChange(e) {
+  function handleChange(e) {
     e.preventDefault();
-     dispatch(filterTypes(e.target.value));
+    if (e.target.value === "Tipos") {
+      dispatch(getAllPokemons());
+    } else {
+      dispatch(filterTypes(e.target.value));
+    }
   }
   return (
     <select onChange={(e) => handleChange(e)} className="types">

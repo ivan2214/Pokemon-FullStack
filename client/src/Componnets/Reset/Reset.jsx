@@ -13,7 +13,7 @@ const Reset = () => {
   return (
     <>
       <button type="submit" onClick={(e) => reset(e)} className="searchButton">
-        <img src={refresh} alt="buscar" className="buscar"></img>
+        <img loading="lazi" src={refresh} alt="buscar" className="buscar"></img>
       </button>
     </>
   );

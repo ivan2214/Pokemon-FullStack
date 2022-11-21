@@ -14,10 +14,9 @@ const Cards = () => {
   const [pokesPorPagina] = useState(12);
   const ultimoPokemon = paginaActual * pokesPorPagina; // 1 * 12 > 12  --------- 2*12 > 24 asi sucesivamente
   const primerPokemon = ultimoPokemon - pokesPorPagina; // 12 - 12 > 12 --------- 24 - 12 > 12 asi sucesivamente
-  const pokemonsPaginados =
-    pokemons.length > 1
-      ? pokemons.slice(primerPokemon, ultimoPokemon)
-      : pokemons;
+  const pokemonsPaginados = pokemons.length
+    ? pokemons.slice(primerPokemon, ultimoPokemon)
+    : pokemons;
   const totalPokemons = pokemons.length;
   const dispatch = useDispatch();
 
@@ -32,7 +31,7 @@ const Cards = () => {
   function reset() {
     dispatch(getAllPokemons());
   }
-  console.log(pokemons);
+
   return (
     <>
       <Paginacion
@@ -44,7 +43,7 @@ const Cards = () => {
       />
       {loading ? (
         <Spinner />
-      ) : pokemons.length ? (
+      ) : pokemonsPaginados.length ? (
         <section className="cards-container">
           {pokemonsPaginados?.map((p) => (
             <CardPokemon

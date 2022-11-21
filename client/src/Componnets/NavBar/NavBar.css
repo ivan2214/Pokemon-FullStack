@@ -41,3 +41,41 @@
 .imgNav {
   width: 10%;
 }
+
+@media screen and (min-width: 320px) {
+  .header {
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .nav {
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .searchAndReset {
+    overflow: hidden;
+    max-width: 100%;
+    flex-direction: column-reverse;
+  }
+  .search {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .orderAndFilter {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .searchAndReset {
+    flex-direction: row-reverse;
+  }
+  .search {
+    flex-direction: row;
+  }
+  .orderAndFilter {
+    flex-direction: row;
+  }
+}

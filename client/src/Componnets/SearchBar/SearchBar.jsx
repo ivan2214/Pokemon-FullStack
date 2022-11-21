@@ -38,7 +38,7 @@ const SearchBar = () => {
           onClick={(e) => handleSubmit(e)}
           className="searchButton"
         >
-          <img src={buscar} alt="buscar" className="buscar"></img>
+          <img src={buscar} alt="buscar" loading="lazi" className="buscar"></img>
         </button>
       </form>
     

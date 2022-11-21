@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { pokeDetails } from "../../redux/actions";
+import { Link, useHistory, useParams } from "react-router-dom";
+import {
+  deletePokemon,
+  getAllPokemons,
+  pokeDetails,
+} from "../../redux/actions";
 import pokemonImg from "../../assets/images/pokemon.png";
 import pokeball from "../../assets/giftPokemon.gif";
 
@@ -9,11 +13,19 @@ import "./details.css";
 const CardDetail = () => {
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.details);
-  console.log();
+  const history = useHistory();
   const { id } = useParams();
   useEffect(() => {
     dispatch(pokeDetails(id));
   }, [dispatch, id]);
+
+  const handlerDelete = (e) => {
+    e.preventDefault();
+    dispatch(deletePokemon(id));
+    alert("Pokemon eliminado");
+    history.push("/home");
+    dispatch(getAllPokemons());
+  };
 
   return (
     <>
@@ -22,15 +34,22 @@ const CardDetail = () => {
           <img src={pokemonImg} alt="" className="imgNav" loading="lazi" />
         </Link>
       </div>
-
+      {/* pokemon[0].types[0] */}
       <div>
         {pokemon.length ? (
           <div className="contGral">
             <div className="contRed">
-              <div className={`${pokemon[0].types[0]} contGris`}>
+              <div
+                className={`${
+                  typeof pokemon[0].types[0] == "object"
+                    ? pokemon[0]?.types[0].name
+                    : pokemon[0]?.types[0]
+                } contGris`}
+              >
                 <div className="contIzq">
                   <div className="circulo">
                     <img
+                      loading="lazi"
                       src={pokemon[0].image}
                       alt="imagen-del-pokemon"
                       className="image"
@@ -39,16 +58,20 @@ const CardDetail = () => {
                   <div className="infoBasica">
                     <h2 className="name">{pokemon[0].name}</h2>
                     <ul className="types">
-                      {pokemon[0].types?.map((t) => (
-                        <div
-                          key={
-                             pokemon[0].name + " " + t
-                          }
-                          className={t}
-                        >
-                          {t}
-                        </div>
-                      ))}
+                      {pokemon[0].types?.map((t) => {
+                        return (
+                          <div
+                            key={
+                              pokemon[0].name + " " + typeof t === "object"
+                                ? t.name
+                                : t
+                            }
+                            className={typeof t === "object" ? t.name : t}
+                          >
+                            {typeof t === "object" ? t.name : t}
+                          </div>
+                        );
+                      })}
                     </ul>
                     <div className="id">#ID {pokemon[0].pokeId}</div>
                   </div>
@@ -57,12 +80,12 @@ const CardDetail = () => {
                 <div className="contDer">
                   <div className="alturaPeso">
                     <div className="medidas">
-                      <div className="title">Height</div>
+                      <div className="titleDetails">Height</div>
                       <div>{pokemon[0].height} m</div>
                     </div>
 
                     <div className="medidas">
-                      <div className="title">Weight</div>
+                      <div className="titleDetails">Weight</div>
                       <div>{pokemon[0].weight} kg</div>
                     </div>
                   </div>
@@ -120,6 +143,23 @@ const CardDetail = () => {
                         ></div>
                       </div>
                     </div>
+
+                    {pokemon[0].createInDataBase && (
+                      <div className={"buttons"}>
+                        <Link
+                          to={`/pokemons/editar/${id}`}
+                          className={`${"editPokemon"} `}
+                        >
+                          Edit Pokemon
+                        </Link>
+                        <button
+                          onClick={(e) => handlerDelete(e)}
+                          className={"buttonRed deleteButton"}
+                        >
+                          Delete Pokemon
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -127,7 +167,12 @@ const CardDetail = () => {
           </div>
         ) : (
           <div className="poke">
-            <img src={pokeball} alt="pokeball" className="pokeball" />
+            <img
+              loading="lazi"
+              src={pokeball}
+              alt="pokeball"
+              className="pokeball"
+            />
           </div>
         )}
       </div>

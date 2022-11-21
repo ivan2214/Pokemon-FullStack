@@ -19,14 +19,8 @@ ul {
   margin-top: 30px;
 }
 
-.ash {
-  height: 570px;
-  position: absolute;
-  right: -110px;
-}
-
 .redTitle {
-  background-color: #eb544d;
+  background-color: #33579a;
   width: 100%;
   height: 60px;
   display: flex;
@@ -36,7 +30,7 @@ ul {
 }
 
 .title {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   font-family: "Rubik", sans-serif;
   font-weight: 700;
   font-size: 26px;
@@ -103,16 +97,6 @@ ul {
   font-family: "Rubik", sans-serif;
 }
 
-.deleteButton {
-  border-radius: 10px;
-  border: none;
-  background-color: #eb544d;
-  color: #fff;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 12px;
-}
-
 .types {
   display: flex;
   list-style: none;
@@ -122,11 +106,30 @@ ul {
   margin-top: 5px;
 }
 
+.tipos {
+  background-color: #33579a;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  gap: 1.5rem;
+  cursor: pointer;
+}
+
+.delete {
+  background-color: transparent;
+  color: #fff;
+  border: 0;
+  cursor: pointer;
+}
+
 .button {
-  height: 30px;
-  width: 100px;
-  border-radius: 8px;
-  background-color: #eb544d;
+  padding: 1rem;
+  width:fit-content;
+  border-radius: 0.5rem;
+  background-color: #33579a;
   color: #fff;
   font-family: "Rubik", sans-serif;
   cursor: pointer;
@@ -153,7 +156,7 @@ ul {
 }
 
 .navBar {
-  background-color: #eb544d;
+  background-color: #33579a;
   height: 50px;
   display: flex;
   align-items: center;

@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       },
 
       image: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING,
       },
       createInDataBase: {
         type: DataTypes.BOOLEAN,

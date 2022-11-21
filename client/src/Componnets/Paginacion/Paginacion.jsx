@@ -28,12 +28,12 @@ export const Paginacion = ({
         <div className="divNumbers">
           {numberPages.map((n) => (
             <li key={n}>
-              <a
+              <p
                 onClick={() => setPaginaActual(n)}
                 className={` ${n === paginaActual ? "is-active" : ""} `}
               >
                 {n}
-              </a>
+              </p>
             </li>
           ))}
         </div>

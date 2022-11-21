@@ -1,4 +1,6 @@
 import {
+  DELETE_POKEMON,
+  EDIT_POKEMON,
   FILTER_CREATE,
   FILTER_TYPE,
   GET_ALL_POKEMONS,
@@ -67,26 +69,33 @@ const reducer = (state = initialState, { type, payload, loading }) => {
       };
     case ORDER_BY_ATACK:
       const pokes = [...state.pokemons];
-      let orderByAttack =
-        payload === "atack"
-          ? pokes.sort((a, b) => {
-              if (a.attack > b.attack) {
-                return -1;
-              }
-              if (b.attack > a.attack) {
-                return 1;
-              }
-              return 0;
-            })
-          : pokes.sort((a, b) => {
-              if (a.attack > b.attack) {
-                return 1;
-              }
-              if (b.attack > a.attack) {
-                return -1;
-              }
-              return 0;
-            });
+      let orderByAttack;
+      console.log(payload);
+
+      if (payload === "ascFuerza") {
+        orderByAttack = pokes.sort((a, b) => {
+          if (a.attack > b.attack) {
+            return -1;
+          }
+          if (b.attack > a.attack) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+
+      if (payload === "descFuerza") {
+        console.log(payload);
+        orderByAttack = pokes.sort((a, b) => {
+          if (a.attack > b.attack) {
+            return 1;
+          }
+          if (b.attack > a.attack) {
+            return -1;
+          }
+          return 0;
+        });
+      }
 
       return {
         ...state,
@@ -100,10 +109,12 @@ const reducer = (state = initialState, { type, payload, loading }) => {
       };
     case FILTER_TYPE:
       const todosPokemons = [...state.allPokemons];
-      let filterPoke =
-        payload === "Tipos"
-          ? todosPokemons
-          : todosPokemons?.filter((p) => p.types?.includes(payload));
+      let filterPoke = todosPokemons?.filter((p) => {
+        if (typeof p.types[0] === "object") {
+          return p.types[0].name === payload;
+        }
+        return p.types?.includes(payload);
+      });
 
       return {
         ...state,
@@ -124,7 +135,14 @@ const reducer = (state = initialState, { type, payload, loading }) => {
       return { ...state, pokemons: pokemonesFiltrados };
     case POST_POKEMON:
       return { ...state };
-
+    case DELETE_POKEMON:
+      return {
+        ...state,
+      };
+    case EDIT_POKEMON:
+      return {
+        ...state,
+      };
     default:
       return state;
   }

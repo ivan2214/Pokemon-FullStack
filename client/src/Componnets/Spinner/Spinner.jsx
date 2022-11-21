@@ -6,7 +6,7 @@ const Spinner = () => {
   return (
     <>
      <picture className="gif-container">
-      <img src={giftPokemon} alt="" />
+      <img loading="lazi" src={giftPokemon} alt="" />
      </picture>
     </>
   );
