@@ -108,11 +108,9 @@ const reducer = (state = initialState, { type, payload, loading }) => {
         types: payload,
       };
     case FILTER_TYPE:
-      const todosPokemons = [...state.allPokemons];
-      let filterPoke =
-        payload === "Tipos"
-          ? todosPokemons
-          : todosPokemons?.filter((p) => p.types?.includes(payload));
+      console.log(payload);
+      const todosPokemons = [...state.pokemons];
+      let filterPoke = todosPokemons?.filter((p) => p.types?.includes(payload));
 
       return {
         ...state,
