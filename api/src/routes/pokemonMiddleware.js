@@ -100,7 +100,7 @@ router.put("/editar/:id", async (req, res) => {
     const { name, hp, attack, defense, speed, height, weight, image, types } =
       req.body;
     const { id } = req.params;
-    console.log("type info : " + types[0]);
+    
     if (id) {
       if (!name) {
         throw new Error("Faltan Parametros obligatorios");
